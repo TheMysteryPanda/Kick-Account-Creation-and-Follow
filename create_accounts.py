@@ -54,7 +54,38 @@ def dump_cookies(driver, account):
     if os.path.exists(f'{cwd}/cookies') == False:
         os.mkdir(f'{cwd}/cookies')
     with open(f'{cwd}/cookies/{account}.json', 'w', newline='') as outputdata:
-        json.dump(cookies, outputdata) 
+        json.dump(cookies, outputdata)
+        
+    """
+    NOTE:
+    This is how we would login to kick by using the cookies:
+    
+    driver.get("https://kick.com/")
+    try:
+        with open(f"{cwd}//cookies//{account}.json", 'r') as cookiesfile:
+            cookies = json.load(cookiesfile)
+            for cookie in cookies:
+                driver.add_cookie(cookie)
+            print(f"[{account}] Successfully loaded cookies")
+            driver.get("https://kick.com")
+    except:
+        # Wait until the login button is clickable
+        login_button = WebDriverWait(
+            driver, 8).until(
+            EC.element_to_be_clickable(
+                (By.ID, 'login-button')))
+        driver.execute_script("arguments[0].click();", login_button)
+        time.sleep(1)
+        action.send_keys(account).perform()
+        action.send_keys(Keys.TAB).perform()
+        action.send_keys("BotAccount123!").perform()
+        action.send_keys(Keys.ENTER).perform()
+        get_kick_code(driver, account)    
+    
+    """
+        
+        
+         
 
 def save_username_to_file(account):
     """
