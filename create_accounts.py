@@ -28,6 +28,11 @@ cwd = os.getcwd()
 # Add your email domains here
 working_domains = ["YOUR DOMAINS"]
 
+# Your Details to your imap server
+imap_server = 'your.imap.com'
+username = 'username'
+password = "password"
+
 def generate_username():
     """
     Generate a random username with length between 6 and 15.
@@ -161,11 +166,6 @@ def get_kick_code(driver, accountname):
     action = ActionChains(driver)
    
     try:
-
-        # Connect to the Roundcube IMAP server
-        imap_server = 'your.imap.com'
-        username = 'username'
-        password = "password"
 
         imap = imaplib.IMAP4_SSL(imap_server)
         imap.login(username, password)
